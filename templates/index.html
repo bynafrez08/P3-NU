@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    home
+{% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <div class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center">
+        <div class="content text-center">
+          <span class="text-white welcome"></span>
+          <p>Toda la información sobre equipos y jugadores</p>
+          <a href="{{ url_for('jugadores') }}" class="btn btn-outline-primary px-4 py-2 fs-8 mt-2" role="button">Jugadores</a>
+          <a href="{{ url_for('equipos') }}" class="btn btn-outline-primary px-4 py-2 fs-8 mt-2" role="button">Equipos</a>
+        </div>
+    </div>
+
+
+ <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <script>
+    var typingEffect = new Typed(".welcome",{
+      strings : ["¡Bienvenido a FootballHub!"],
+      loop : true,
+      typeSpeed : 100,
+      backSpeed : 80,
+      startDelay : 1000,
+      backDelay : 1500
+    })
+  </script>
+
+{% endblock %}

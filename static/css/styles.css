@@ -1,0 +1,31 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.banner-image {
+  background-image: url(../dar3.jpg);
+  background-size: cover;
+  animation: change 9s infinite ease-in-out;
+}
+.banner-image span{
+  color: white;
+  font-size: 60px;
+}
+
+.text-white{
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 40px;
+}
+
+.banner-image p{
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 24px;
+}
+
+.navbar-nav a{
+  font-size: 16px;
+}

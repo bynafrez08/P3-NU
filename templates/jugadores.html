@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Jugadores
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+    <h1 class="text-center p-5 mt-5">Jugadores</h1>
+    <div class="contenedor p-1 row justify-content-center">
+        <div class="col-auto">
+            </table>
+            <table class="table table-bordered table-striped" id="table_dir">
+              <thead>
+                <tr class="table-primary">
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellido</th>
+                  <th scope="col">Altura</th>
+                  <th scope="col">Posicion</th>
+                  <th scope="col">Peso</th>
+                  <th scope="col">Edad</th>
+                  <th scope="col">Foto</th>
+                  <th scope="col">Equipo</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                 {% for jugador in datos %}
+                     <tr>
+                          <td>{{ jugador.nombre }}</td>
+                          <td>{{ jugador.apellido }}</td>
+                          <td>{{ jugador.altura }}</td>
+                          <td>{{ jugador.posicion }}</td>
+                          <td>{{ jugador.peso }}</td>
+                          <td>{{ jugador.edad }}</td>
+                          <td><img src="{{ jugador.foto }}" width="80" height="70"></td>
+                          <td>{{ jugador.equipo }}</td>
+                          <td>
+                            <a href="/jugadores/{{ jugador.id }}/delete" class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')">Eliminar</a>
+                            <a href="/jugadores/{{ jugador.id }}/modify" class="btn btn-warning">Modificar</a>
+                          </td>
+                     </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <h2 class="text-center p-2 mt-3">Añadir un nuevo jugador</h2>
+    <div class="d-grid gap-2 col-3 mx-auto">
+        <br>
+        <a href="{{ url_for('insertar_jugador') }}" class="btn btn-primary" type="button">Añadir</a>
+    </div>
+    <br>
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#table_dir').DataTable();
+        } );
+    </script>
+{% endblock %}

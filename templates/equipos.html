@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    home
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+    <h1 class="text-center p-5 mt-5">Equipos</h1>
+    <div class="contenedor p-1 row justify-content-center">
+        <div class="col-auto">
+            <table class="table table-bordered table-striped" id="table_dir">
+              <thead>
+                <tr class="table-primary">
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Jugadores</th>
+                  <th scope="col">Estadio</th>
+                  <th scope="col">Champions</th>
+                  <th scope="col">Logo</th>
+                  <th scope="col">Presidente</th>
+                  <th scope="col">Entrenador</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+                  <tbody>
+                    {% for equipo in datos %}
+                         <tr>
+                              <td>{{ equipo.nombre }}</td>
+                              <td>{{ equipo.jugadores }}</td>
+                              <td>{{ equipo.estadio }}</td>
+                              <td>{{ equipo.champions_copa }}</td>
+                              <td><img src="{{ equipo.logo }}" width="80" height="70"></td>
+                              <td>{{ equipo.presidente }}</td>
+                              <td>{{ equipo.entrenador }}</td>
+                              <td>
+                                <a href="/equipos/{{ equipo.id }}/delete" class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')">Eliminar</a>
+                                <a href="/equipos/{{ equipo.id }}/modify" class="btn btn-warning">Modificar</a>
+                             </td>
+                         </tr>
+                    {% endfor %}
+                  </tbody>
+            </table>
+        </div>
+    </div>
+    <h2 class="text-center p-2 mt-3">Añadir un nuevo equipo</h2>
+    <div class="d-grid gap-2 col-3 mx-auto">
+        <br>
+        <a href="{{ url_for('insertar_equipo') }}" class="btn btn-primary" type="button">Añadir</a>
+    </div>
+    <br>
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#table_dir').DataTable();
+        } );
+    </script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+    Perfil
+{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  <h2 class="text-center">Info Usuario</h2>
+  <br>
+  <div class="container d-flex justify-content-center">
+      <div class="card text-center" style="width: 35rem;">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Nombre de Usuario: {{valores['username']}}</li>
+            <li class="list-group-item">Email: {{valores['email']}}</li>
+            <li class="list-group-item">Nombre: {{valores['name']}}</li>
+            <li class="list-group-item">Apellido: {{valores['surname']}}</li>
+          </ul>
+      </div>
+  </div>
+  <br>
+  <h2 class="text-center">Ajustes</h2>
+   <div class="d-grid gap-2 d-md-block text-center">
+        <br>
+        <a href="{{ url_for('logout') }}" class="btn btn-secondary" type="button">Salir</a>
+        <a href="{{ url_for('eliminar_usuario', username=session['username']) }}" class="btn btn-danger" type="button" onclick="return confirm('Estas seguro de eliminar tu cuenta?')">Eliminar Cuenta</a>
+   </div>
+   <br>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    ModifyJugadores
+{% endblock %}
+
+{% block content %}
+        <div class="mt-5 conatiner">
+        <br>
+        <br>
+        <div class="text-center">
+            <h3 class="text-primary">Modificar un Jugador</h3>
+            <p class="lead">Solo se pueden modificar los siguientes campos:</p>
+        </div>
+
+        <form action="/jugadores/{{ jugador.id }}/modify/" method="POST">
+            <div class=" d-flex align-items-center justify-content-center">
+                    <div class="bg-white col-md-4">
+                        <div class="p-4 rounded shadow-md">
+                            <div>
+                                <label class="form-label" for="nombre">Nombre</label>
+                                <input type="text" name="nombre" class="form-control" placeholder="" id="nombre" value="{{ jugador.nombre }}">
+                            </div>
+                            <div class="mt-3">
+                                <label class="form-label" for="apellido">Apellido</label>
+                                <input type="text" name="apellido" class="form-control" placeholder="" id="apellido" value="{{ jugador.apellido }}">
+                            </div>
+                            <div class="mt-3">
+                                <label  class="form-label" for="altura">Altura</label>
+                                <input type="number" name="altura" class="form-control" placeholder="" id="altura" value="{{ jugador.altura }}">
+                            </div>
+                            <div class="mt-3">
+                                <label  class="form-label" for="posicion">Posicion</label>
+                                <input type="text" name="posicion" class="form-control" placeholder="" id="posicion" value="{{ jugador.posicion }}">
+                            </div>
+                            <div class="mt-3">
+                                <label  class="form-label" for="peso">Peso</label>
+                                <input type="number" name="peso" class="form-control" placeholder="" id="peso" value="{{ jugador.peso }}">
+                            </div>
+                            <div class="mt-3">
+                                <label  class="form-label" for="edad">Edad</label>
+                                <input type="number" name="edad" class="form-control" placeholder="" id="edad" value="{{ jugador.edad }}">
+                            </div>
+                            <div class="mt-3">
+                                <label  class="form-label" for="foto">Foto</label>
+                                <input type="url" name="foto" class="form-control" placeholder="https://...." id="foto" value="{{ jugador.foto }}">
+                            </div>
+                            <div class="mt-3 mb-3">
+                                <label class="form-label">Equipo</label>
+                                <select id="equipo" name="equipo" class="form-select" aria-label="Default select example" value="{{ jugador.equipo }}">
+                                    {% for equipo in equipos %}
+                                        {% if equipo.id  == jugador.id %}
+                                            <option value="{{ equipo.id }}" selected>{{ equipo.nombre }}</option>
+                                        {% else %}
+                                            <option value="{{ equipo.id }}">{{ equipo.nombre }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button class="btn btn-primary">
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

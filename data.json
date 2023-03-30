@@ -1,0 +1,160 @@
+{
+  "equipos": [
+    {
+      "id": "PSG",
+      "nombre": "Paris Saint-Germain",
+      "estadio": "Parque de los Principes",
+      "logo": "https://logos-world.net/wp-content/uploads/2020/06/PSG-Logo.png",
+      "champions_copa": 0,
+      "entrenador": "Christophe Galtier",
+      "presidente": "Nasser Al-Khelaifi",
+      "jugadores": ["km"]
+    },
+    {
+      "id": "MAD",
+      "nombre": "Real madrid",
+      "estadio": "Santiago bernaveu",
+      "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png",
+      "champions_copa": 14,
+      "entrenador": "Carlo Ancelotti",
+      "presidente": "Florentino Perez",
+      "jugadores": ["kb", "vj"]
+    },
+    {
+      "id": "AT",
+      "nombre": "Atletico de madrid",
+      "estadio": "Estadio Cívitas Metropolitano",
+      "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Atletico_Madrid_2017_logo.svg/1200px-Atletico_Madrid_2017_logo.svg.png",
+      "champions_copa": 0,
+      "entrenador": "Diego simeone",
+      "presidente": "Enrique Cerezo Torres",
+      "jugadores": ["ag"]
+    },
+    {
+      "id": "Liv",
+      "nombre": "Liverpool",
+      "estadio": "Anfield",
+      "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/1200px-Liverpool_FC.svg.png",
+      "champions_copa": 6,
+      "entrenador": "Jurgen Klopp",
+      "presidente": "Tom Werner",
+      "jugadores": ["ms"]
+    },
+    {
+      "id": "BCN",
+      "nombre": "Barcelona",
+      "estadio": "Camp nou",
+      "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/1200px-FC_Barcelona_%28crest%29.svg.png",
+      "champions_copa": 5,
+      "entrenador": "xavi hernandez",
+      "presidente": "Joan Laporta",
+      "jugadores": ["pg", "gv"]
+    },
+    {
+      "id": "MAN",
+      "nombre": "manchester united",
+      "estadio": "Old Trafford",
+      "logo": "https://upload.wikimedia.org/wikipedia/an/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png",
+      "champions_copa": 3,
+      "entrenador": "Erik ten Hag",
+      "presidente": "Joel Glazer",
+      "jugadores": ["cr"]
+    }
+  ],
+  "jugadores": [
+    {
+      "id": "pg",
+      "nombre": "Pedro",
+      "apellido": "González",
+      "altura": 1.74,
+      "posicion": "Centrocampista",
+      "peso": 60,
+      "foto": "https://assets.laliga.com/squad/2022/t178/p490541/2048x2225/p490541_t178_2022_0_001_000.png",
+      "edad": 18,
+      "equipo": "BCN"
+    },
+    {
+      "id": "gv",
+      "nombre": "Páez",
+      "apellido": "Gavira",
+      "altura": 1.73,
+      "posicion": "delantero",
+      "peso": 60,
+      "foto": "https://images2.minutemediacdn.com/image/upload/c_crop,w_4169,h_2345,x_0,y_137/c_fill,w_720,ar_16:9,f_auto,q_auto,g_auto/images/GettyImages/mmsport/90min_es_international_web/01gg5ay4528vevxn6b55.jpg",
+      "edad": 18,
+      "equipo": "BCN"
+    },
+    {
+      "id": "ms",
+      "nombre": "Mohammed",
+      "apellido": "salah",
+      "altura": 1.75,
+      "posicion": "Delantero",
+      "peso": 73,
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Mohamed_Salah_2018.jpg",
+      "edad": 30,
+      "equipo": "Liv"
+    },
+    {
+      "id": "ag",
+      "nombre": "Antonie",
+      "apellido": "Griezman",
+      "altura": 1.76,
+      "posicion": "Delantero",
+      "peso": 73,
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Antoine_Griezmann_2018.jpg",
+      "edad": 31,
+      "equipo": "AT"
+    },
+    {
+      "id": "kb",
+      "nombre": "Karim",
+      "apellido": "Benzema",
+      "altura": 1.85,
+      "posicion": "Delantero",
+      "peso": 81,
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Karim_Benzema_wearing_Real_Madrid_home_kit_2021-2022.jpg/1200px-Karim_Benzema_wearing_Real_Madrid_home_kit_2021-2022.jpg",
+      "edad": 34,
+      "equipo" : "MAD"
+    },
+    {
+      "id": "vj",
+      "nombre": "vinicius",
+      "apellido": "junior",
+      "altura": 1.80,
+      "posicion": "delatero",
+      "peso": 70,
+      "foto": "https://cadenaser.com/resizer/f4nxA1QLwKYQS6O6rZCMhv3Szww=/736x552/filters:format(jpg):quality(70)/cloudfront-eu-central-1.images.arcpublishing.com/prisaradio/I3RRBR2Q4FEEPGAJDQKPAGVUPM.jpg",
+      "edad": 23,
+      "equipo": "MAD"
+    },
+    {
+      "id": "km",
+      "nombre": "Kylian",
+      "apellido": "Mbappe",
+      "altura": 1.78,
+      "posicion": "Delantero",
+      "peso": 73,
+      "foto": "https://s.hs-data.com/bilder/spieler/gross/284095.jpg",
+      "edad": 24,
+      "equipo": "PSG"
+    },
+    {
+      "id": "cr",
+      "nombre": "cristiano",
+      "apellido": "ronaldo",
+      "altura": 1.87,
+      "posicion": "Delantero",
+      "peso": 85,
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cristiano_Ronaldo_2018.jpg/245px-Cristiano_Ronaldo_2018.jpg",
+      "edad": 37,
+      "equipo": "MAN"
+    }
+  ],
+  "developer": {
+    "name": "Nafsu Uddin",
+    "email": "example@example.com",
+    "web": "www.footballhub.com"
+  }
+
+}
