@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    registrar
+    añadir_user
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
             <p class="lead">Registrate ahora !!!</p>
         </div>
 
-        <form action="/register/" method="POST">
+        <form action="/users/insertar/" method="POST">
             <div class=" d-flex align-items-center justify-content-center">
                 <div class="bg-white col-md-4">
                     <div class="p-4 rounded shadow-md">
@@ -34,9 +34,15 @@
                             <label  class="form-label">Nombre</label>
                             <input type="text" name="name" class="form-control" placeholder="" id="name" required>
                         </div>
-                        <div class="mt-3 mb-3">
+                        <div class="mt-3">
                             <label class="form-label">Apellido</label>
                             <input type="text" name="surname" class="form-control" placeholder="" id="surname" required>
+                        </div>
+                        <div class="mt-3 mb-3">
+                            <select id="rol" name="rol">
+                                <option value="admin" {% if user[5] == "admin" %}selected{% endif %}>Administrador</option>
+                                <option value="user" {% if user[5] == "user" %}selected{% endif %}>Usuario</option>
+                            </select>
                         </div>
                         <button class="btn btn-primary">
                             Enviar

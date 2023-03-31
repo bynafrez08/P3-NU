@@ -10,6 +10,14 @@ def register_user(username,password,email,name,surname):
     conn.commit()
     conn.close()
 
+def add_user(username,password,email,name,surname,rol):
+    conn = sqlite3.connect('footballhub.sqlite3')
+    sql = 'INSERT INTO users (username,password,email,name,surname,rol) values (?,?,?,?,?,?)'
+    valores = [username,password,email,name,surname,rol]
+    conn.execute(sql,valores)
+    conn.commit()
+    conn.close()
+
 def check_login(username,password):
     conn = sqlite3.connect('footballhub.sqlite3')
     cur = conn.cursor()
@@ -96,6 +104,24 @@ def show_jugadores(id_jugadores=None):
     conn.close()
     return jugadores
 
+
+def show_users():
+    conn = sqlite3.connect('footballhub.sqlite3')
+    cursor = conn.execute('SELECT username, email, name, surname, rol FROM users')
+
+    users = []
+
+    for row in cursor:
+        user = {
+            'username': row[0],
+            'email': row[1],
+            'name': row[2],
+            'surname': row[3],
+            'rol': row[4]
+        }
+        users.append(user)
+    conn.close()
+    return users
 
 def show_equipos(id_equipos=None):
     conn = sqlite3.connect('footballhub.sqlite3')

@@ -74,6 +74,15 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get('rol') != 'admin':
+            flash('Pagina restringida solo para admin','danger')
+            return redirect(request.referrer)
+        return f(*args, **kwargs)
+    return decorated_function
+
 @app.route('/logout/')
 def logout():
     # session.pop para eliminar la cookie de session.
@@ -102,6 +111,41 @@ def perfil():
         return render_template('perfil.html',valores=valores)
     else:
         return redirect(url_for('login'))
+
+@app.route('/users/')
+@login_required
+def user_page():
+    users = db_futbol.show_users()
+    return render_template('users.html', datos=users)
+
+@app.route('/users/<username>/delete/')
+@login_required
+def del_users(username):
+     # eliminar la cuenta y la cookie de session si el usuario ha iniciado correctamente la session. Si no redirige al login
+    if 'username' in session:
+       db_futbol.delete_user(username)
+       return redirect(url_for('user_page'))
+
+@app.route('/users/insertar/')
+@login_required
+def insert_user():
+    if request.method == 'POST':
+        username  = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        name = request.form['name']
+        surname = request.form['surname']
+        rol = request.form['rol']
+
+        #encriptar la contraseña en la bd
+        hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+
+        db_futbol.add_user(username,hashed_password,email,name,surname,rol)
+        flash(f'Se ha creado el usuario {username}','success')
+        return redirect(url_for('user_page'))
+
+    else:
+        return render_template('useradd.html')
 
 @app.route('/jugadores/')
 @login_required

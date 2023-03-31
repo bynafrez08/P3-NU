@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Users
+{% endblock %}
+
+{% block content %}
+    {% include 'flash_messages.html' %}
+    <h1 class="text-center p-5 mt-5">Lista de usuarios</h1>
+    <div class="contenedor p-1 row justify-content-center">
+        <div class="col-auto">
+            </table>
+            <table class="table table-bordered table-striped" id="table_dir">
+              <thead>
+                <tr class="table-primary">
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellido</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                 {% for user in datos %}
+                     <tr>
+                          <td>{{ user.username }}</td>
+                          <td>{{ user.email }}</td>
+                          <td>{{ user.name }}</td>
+                          <td>{{ user.surname }}</td>
+                          <td>
+                            <a href="/users/{{ user.username }}/delete" class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')">Eliminar</a>
+                            <a href="" class="btn btn-warning">Modificar</a>
+                          </td>
+                     </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <h2 class="text-center p-2 mt-3">Crear un usuario</h2>
+    <div class="d-grid gap-2 col-3 mx-auto">
+        <br>
+        <a href="{{ url_for('insert_user') }}" class="btn btn-primary" type="button">Crear Usuario</a>
+    </div>
+    <br>
+{% endblock %}
