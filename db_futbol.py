@@ -10,14 +10,6 @@ def register_user(username,password,email,name,surname):
     conn.commit()
     conn.close()
 
-def add_user(username,password,email,name,surname,rol):
-    conn = sqlite3.connect('footballhub.sqlite3')
-    sql = 'INSERT INTO users (username,password,email,name,surname,rol) values (?,?,?,?,?,?)'
-    valores = [username,password,email,name,surname,rol]
-    conn.execute(sql,valores)
-    conn.commit()
-    conn.close()
-
 def check_login(username,password):
     conn = sqlite3.connect('footballhub.sqlite3')
     cur = conn.cursor()
@@ -105,19 +97,24 @@ def show_jugadores(id_jugadores=None):
     return jugadores
 
 
-def show_users():
+def show_users(id_username=None):
     conn = sqlite3.connect('footballhub.sqlite3')
-    cursor = conn.execute('SELECT username, email, name, surname, rol FROM users')
+    sql = 'SELECT id_username, username, email, name, surname, rol FROM users'
+    if id_username is not None:
+        sql += ' WHERE id_username=' + id_username
+
+    cursor = conn.execute(sql)
 
     users = []
 
     for row in cursor:
         user = {
-            'username': row[0],
-            'email': row[1],
-            'name': row[2],
-            'surname': row[3],
-            'rol': row[4]
+            'id_username': row[0],
+            'username': row[1],
+            'email': row[2],
+            'name': row[3],
+            'surname': row[4],
+            'rol': row[5]
         }
         users.append(user)
     conn.close()
@@ -219,6 +216,15 @@ def modify_equipo(nombre,jugadores,estadio,champions_copa,logo,presidente,entren
     conn = sqlite3.connect('footballhub.sqlite3')
     sql = 'UPDATE equipos SET nombre=?, estadio=?,champions_copa=?,logo=?,presidente=?,entrenador=?, jugadores=? WHERE id=?'
     valores = [nombre,jugadores,estadio,champions_copa,logo,presidente,entrenador,id_equipos]
+    conn.execute(sql,valores)
+    conn.commit()
+    conn.close()
+
+def modify_user(username,password,email,name,surname,rol,id_username):
+    conn = sqlite3.connect('footballhub.sqlite3')
+    hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    sql = 'UPDATE users SET username=?, password=? , email=?, name=?, surname=?, rol=? WHERE id_username=?'
+    valores = [username,hashed_password,email,name,surname,rol,id_username]
     conn.execute(sql,valores)
     conn.commit()
     conn.close()

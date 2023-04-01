@@ -20,23 +20,45 @@ app.secret_key = 'nafsu_secret_key'
 def index():
     return render_template('login.html')
 
-@app.route('/login/', methods=['GET','POST'])
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST': # se envia los datos del formalario que proporciona el usuario por post, que es el usernama y password.
+    if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
 
-        # pasar los datos proporcionados del usuario en la funcion check_login para comprabar las credenciales desde la bd.
-        if db_futbol.check_login(username,password):
-            # la session se inicia con el campo username que da el usuario y se redirige a home.
+        if username == 'admin' and password == 'admin':
+            return redirect(url_for('cambiar_password'))
+
+        if db_futbol.check_login(username, password):
             session['username'] = username
             return redirect(url_for('home'))
         else:
-            # en la caso de que las credenciales son incorrectas.
             flash('Credenciales incorrectas', 'danger')
             return redirect(url_for('login'))
+
     else:
-        return render_template('login.html') # si no se ha enviado ningun formulario vuelve a login.
+        return render_template('login.html')
+
+@app.route('/cambiar_password/', methods=['GET', 'POST'])
+def cambiar_password():
+    if request.method == 'POST':
+        nueva_pass = request.form['new_password']
+
+        if db_futbol.check_login('admin', 'admin'):
+            conn = sqlite3.connect('footballhub.sqlite3')
+            cursor = conn.cursor()
+            hashed_password = hashlib.sha256(nueva_pass.encode('utf-8')).hexdigest()
+            cursor.execute('UPDATE users SET password = ? WHERE username = "admin"', (nueva_pass,))
+            conn.commit()
+            conn.close()
+            flash('Contraseña cambiada correctamente', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Usuario admin no encontrado.', 'danger')
+            return redirect(url_for('cambiar_password'))
+
+    return render_template('cambiar_pass.html')
+
 
 @app.route('/home/', methods=['GET','POST'])
 def home():
@@ -74,11 +96,11 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get('rol') != 'admin':
-            flash('Pagina restringida solo para admin','danger')
             return redirect(request.referrer)
         return f(*args, **kwargs)
     return decorated_function
@@ -121,12 +143,12 @@ def user_page():
 @app.route('/users/<username>/delete/')
 @login_required
 def del_users(username):
-     # eliminar la cuenta y la cookie de session si el usuario ha iniciado correctamente la session. Si no redirige al login
     if 'username' in session:
        db_futbol.delete_user(username)
+       flash(f'Usuario {username} eliminado', 'success')
        return redirect(url_for('user_page'))
 
-@app.route('/users/insertar/')
+@app.route('/users/insertar/', methods=['GET','POST'])
 @login_required
 def insert_user():
     if request.method == 'POST':
@@ -135,17 +157,36 @@ def insert_user():
         email = request.form['email']
         name = request.form['name']
         surname = request.form['surname']
-        rol = request.form['rol']
 
         #encriptar la contraseña en la bd
         hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
-        db_futbol.add_user(username,hashed_password,email,name,surname,rol)
+        db_futbol.register_user(username,hashed_password,email,name,surname)
         flash(f'Se ha creado el usuario {username}','success')
         return redirect(url_for('user_page'))
 
     else:
         return render_template('useradd.html')
+
+@app.route('/users/<id_username>/modify/', methods=['GET','POST'])
+@login_required
+def modify_users(id_username):
+    if request.method == 'GET':
+        users = db_futbol.show_users(id_username)
+        return render_template('modify_users.html', users=users[0])
+
+    if request.method == 'POST':
+        username  = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        name = request.form['name']
+        surname = request.form['surname']
+        rol = request.form['rol']
+
+        db_futbol.modify_user(username,password,email,name,surname,rol,id_username)
+        flash(f'Se ha modificado el {username}','success')
+        return redirect(url_for('user_page'))
+
 
 @app.route('/jugadores/')
 @login_required
